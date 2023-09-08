@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-2</title>
+</head>
+<body>
+    <h3>
+        Байрактар. З верхньої частини екрану у випадковій позиції по горизонталі з’являються танки, які їдуть вниз. При кліку на танк він вибухає і зникає з екрану. 
+    </h3>
+
+    <style>
+        #game-container {
+        position: relative;
+        width: 50%;
+        height: 500px;
+        border: 1px solid black;
+        margin: 0 auto;
+        overflow: hidden;
+        }
+        .tank {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-image: url('../img/tank.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+    </style>
+
+    <div id="game-container"></div>
+    <script>
+        const gameContainer = document.getElementById('game-container')
+
+        function createTank() {
+            const tank = document.createElement('div')
+            tank.className = 'tank'
+
+            const maxX = gameContainer.clientWidth - 50
+            const randomX = Math.random() * maxX
+
+            tank.style.left = randomX + 'px'
+            tank.style.top = '0px' // Встановлюємо початкову позицію танка зверху
+
+            tank.addEventListener('click', () => {
+                explodeTank(tank)
+            })
+
+            gameContainer.appendChild(tank);
+
+            const tankSpeed = 1 // Швидкість руху танка вниз (пікселів на крок)
+            const tankInterval = setInterval(() => {
+                const currentTop = parseInt(tank.style.top)
+                if (currentTop < gameContainer.clientHeight - 50) { // Перевіряємо, чи танк дійшов до нижньої межі
+                    tank.style.top = (currentTop + tankSpeed) + 'px'
+                } else {
+                    clearInterval(tankInterval) // Зупиняємо рух танка, якщо він дійшов до нижньої межі
+                    gameContainer.removeChild(tank)
+                }
+            }, 15) // Оновлення руху танка кожні 10 мілісекунд
+
+            setTimeout(() => {
+                gameContainer.removeChild(tank)
+                clearInterval(tankInterval) // Зупиняємо рух танка при його видаленні
+            }, 5000)
+        }
+
+        function explodeTank(tank) {
+            tank.style.display = 'none'
+        }
+
+        setInterval(createTank, 1000)
+    </script>
+
+</body>
+</html>

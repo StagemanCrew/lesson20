@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Gabriela:regular" rel="stylesheet" />
+    <title>task-4</title>
+</head>
+<body>
+    <h3>
+        На сторінці міститься певна кількість кнопок і інпутів. Підраховувати загальну кількість кліків окремо на кнопках і окремо на інпутах.
+    </h3>
+    <style>
+        body{
+            font-family: 'Gabriela';
+        }
+        button{
+            font-family: 'Gabriela';
+        }
+    </style>
+
+    <button id="button1">Кнопка 1</button>
+    <button id="button2">Кнопка 2</button>
+    <input type="text" id="input1" />
+    <input type="text" id="input2" />
+
+    <p id="totalClickCount">Кліки на кнопках: 0, Фокуси на інпутах: 0</p>
+
+    <script>
+        // Отримуємо посилання на всі кнопки і інпути
+        const buttons = document.querySelectorAll('button')
+        const inputs = document.querySelectorAll('input')
+
+        // Ініціалізуємо лічильники для кліків на кнопках і фокусувань на інпутах
+        let buttonClickCount = 0
+        let inputFocusCount = 0
+
+        // Додаємо обробник подій для кожної кнопки
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                buttonClickCount++
+                updateClickCount()
+            })
+        })
+
+        // Додаємо обробник подій для кожного інпута
+        inputs.forEach((input) => {
+            input.addEventListener('focus', () => {
+                inputFocusCount++
+                updateClickCount()
+            })
+        })
+
+        // Функція для оновлення відображення загальної кількості кліків
+        function updateClickCount() {
+            const totalClickCountElement = document.getElementById('totalClickCount')
+            totalClickCountElement.innerHTML = `<h3>Кліки на кнопках: ${buttonClickCount}, Фокуси на інпутах: ${inputFocusCount}</h3>`
+            // totalClickCountElement.textContent = `Кліки на кнопках: ${buttonClickCount}, Фокуси на інпутах: ${inputFocusCount}`
+        }
+
+        updateClickCount()
+    </script>
+</body>
+</html>

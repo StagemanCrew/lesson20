@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Gabriela:regular" rel="stylesheet" />
+    <style>
+        body{
+            font-family: 'Gabriela';
+        }
+    </style>
+    <title>task-7</title>
+</head>
+<body>
+    <h3>
+        Перекладач. Користувачу виводять змішані картки з словами на англійській і українській мові. Користувач поступово клікає на картки (виділяємо синьою рамкою). Якщо знайдено правильні пари карток, що відповідають одному слову, то видаляємо ці картки. Інакше - виділяємо червоною рамкою і через секунду забираємо рамку.
+    </h3>
+
+    <!-- <style>
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card-row {
+            display: flex;
+            justify-content: center;
+        }
+        .card {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .card.selected {
+            color: blue;
+        }
+        .card.wrong {
+            border: 2px solid red;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+
+    <div class="card-container" id="card-container"></div>
+
+    <script>
+        const englishWords = ['table', 'car', 'bus', 'man', 'boy'];
+        const ukrainianWords = ['стіл', 'автомобіль', 'автобус', 'людина', 'хлопець'];
+
+        // Функція для перемішування масиву
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Перемішуємо слова у масивах
+        shuffleArray(englishWords);
+        shuffleArray(ukrainianWords);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const cardContainer = document.getElementById('card-container');
+            let selectedCards = [];
+
+            // Функція для перевірки, чи співпадають обрані картки
+            function checkCards() {
+                if (selectedCards.length === 2) {
+                    const [card1, card2] = selectedCards;
+                    if (card1.dataset.translate === card2.dataset.translate) {
+                        // Пара слів збігається
+                        setTimeout(() => {
+                            card1.classList.add('hidden');
+                            card2.classList.add('hidden');
+                        }, 1000); // Приховуємо через 1 секунду
+                    } else {
+                        // Пара слів не збігається
+                        card1.classList.add('wrong');
+                        card2.classList.add('wrong');
+                        setTimeout(() => {
+                            card1.classList.remove('wrong');
+                            card2.classList.remove('wrong');
+                            card1.classList.remove('selected');
+                            card2.classList.remove('selected');
+                        }, 1000);
+                    }
+                    selectedCards = [];
+                }
+            }
+
+            // Генерація карток
+            const cardRows = [];
+
+            for (let i = 0; i < englishWords.length; i++) {
+                const cardEn = document.createElement('div');
+                const cardUa = document.createElement('div');
+                cardEn.classList.add('card');
+                cardUa.classList.add('card');
+                cardEn.textContent = englishWords[i];
+                cardUa.textContent = ukrainianWords[i];
+                cardEn.dataset.translate = ukrainianWords[i];
+                cardUa.dataset.translate = ukrainianWords[i];
+                // Перевіряємо, чи потрібно створити новий рядок
+                if (cardRows.length === 0 || cardRows[cardRows.length - 1].children.length >= 2) {
+                    const cardRow = document.createElement('div');
+                    cardRow.classList.add('card-row');
+                    cardRows.push(cardRow);
+                }
+
+                // Додаємо картки до останнього рядка
+                cardRows[cardRows.length - 1].appendChild(cardEn);
+                cardRows[cardRows.length - 1].appendChild(cardUa);
+            }
+
+            // Додаємо всі рядки до контейнера
+            cardRows.forEach(cardRow => {
+                cardContainer.appendChild(cardRow);
+            });
+
+            // Додаємо обробник кліків для карток
+            cardContainer.addEventListener('click', (event) => {
+                const card = event.target;
+                if (
+                    card.classList.contains('card') &&
+                    selectedCards.length < 2 &&
+                    !selectedCards.includes(card)
+                ) {
+                    card.classList.add('selected');
+                    selectedCards.push(card);
+                    checkCards();
+                }
+            });
+        });
+    </script> -->
+
+</body>
+</html>

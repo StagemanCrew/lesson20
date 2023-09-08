@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Gabriela:regular" rel="stylesheet" />
+    <title>task-1</title>
+</head>
+<body>
+    <h3><span>Сяючі зорі. Вказана кількість зірочок повинна з’являтися у випадковій частині екрану. Кожна зірка (це екземпляр класу Star) з певним кроком і інтервалом збільшується від мінімального до максимального розміру. Як тільки досягнути максимального розміру зірочка повинна з’являтися у іншій випадковій позиції.</span></h3>
+
+    <style>
+        body{
+            margin: 0;
+        }
+        h3{
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            color: yellow;
+            filter: drop-shadow(0px 0px 5px blue);
+            padding: 30px;
+            text-align: center;
+            font-family: 'Gabriela';
+        }
+        .star-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            background: url('../img/star.png') no-repeat;
+            background-size: contain;
+            width: 50px;
+            height: 50px;
+            transform-origin: center;
+        }
+    </style>
+
+    <div class="star-container"></div>
+
+    <script>
+        class Star {
+            constructor(container) {
+                this.container = container
+                this.element = document.createElement('div')
+                this.element.className = 'star'
+                this.container.appendChild(this.element)
+
+                this.minSize = 0
+                this.maxSize = 30
+                this.size = this.minSize
+
+                this.positionStar()
+                this.animate()
+            }
+
+            positionStar() {
+                const maxX = this.container.clientWidth - this.maxSize
+                const maxY = this.container.clientHeight - this.maxSize
+                this.element.style.left = Math.random() * maxX + 'px'
+                this.element.style.top = Math.random() * maxY + 'px'
+            }
+
+            animate() {
+                const randomInterval = Math.random() * 1000 + 300 // Випадковий інтервал
+                setInterval(() => {
+                    this.size += 1
+                    if (this.size > this.maxSize) {
+                        this.size = this.minSize
+                        this.positionStar()
+                    }
+                    this.element.style.width = this.size + 'px'
+                    this.element.style.height = this.size + 'px'
+                }, randomInterval)
+            }
+        }
+
+        const starContainer = document.querySelector('.star-container')
+
+        // Створення зірок
+        for (let i = 0; i < 30; i++) {
+            new Star(starContainer)
+        }
+    </script>
+</body>
+</html>
